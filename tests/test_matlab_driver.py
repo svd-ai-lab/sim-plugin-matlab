@@ -35,7 +35,9 @@ class TestMatlabParseOutput:
 
 class TestMatlabConnect:
     def test_reports_not_installed_when_missing(self, monkeypatch):
-        monkeypatch.setattr("sim_plugin_matlab.driver.shutil.which", lambda _: None)
+        from sim_plugin_matlab import driver as drv
+
+        monkeypatch.setattr(drv, "_INSTALL_FINDERS", [lambda: []])
         driver = MatlabDriver()
         info = driver.connect()
         assert info.status == "not_installed"

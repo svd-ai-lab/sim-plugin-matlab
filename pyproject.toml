@@ -26,7 +26,7 @@ classifiers = [
 # (or `sim env install matlab`) picks the SDK that matches the MATLAB
 # release they actually have. See compatibility.yaml for the mapping.
 dependencies = [
-    "sim-runtime @ git+https://github.com/svd-ai-lab/sim-cli@main",
+    "sim-cli-core>=0.3",
     "matlabengine",
 ]
 
@@ -44,12 +44,6 @@ matlab = "sim_plugin_matlab:skills_dir"
 [project.urls]
 Homepage = "https://github.com/svd-ai-lab/sim-plugin-matlab"
 Issues = "https://github.com/svd-ai-lab/sim-plugin-matlab/issues"
-
-[tool.hatch.metadata]
-# Required because `sim-runtime` is pinned to a git+https URL — sim-cli is
-# distributed via GitHub, not PyPI. See sim-proj memory: plugin distribution
-# is GitHub-only.
-allow-direct-references = true
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/sim_plugin_matlab"]
