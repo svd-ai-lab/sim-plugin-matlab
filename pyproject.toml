@@ -33,6 +33,7 @@ dependencies = [
 [project.optional-dependencies]
 test = [
     "pytest>=7",
+    "build>=1.0",
 ]
 
 [project.entry-points."sim.drivers"]
@@ -40,6 +41,9 @@ matlab = "sim_plugin_matlab:MatlabDriver"
 
 [project.entry-points."sim.skills"]
 matlab = "sim_plugin_matlab:skills_dir"
+
+[project.entry-points."sim.plugins"]
+matlab = "sim_plugin_matlab:plugin_info"
 
 [project.urls]
 Homepage = "https://github.com/svd-ai-lab/sim-plugin-matlab"
@@ -52,3 +56,7 @@ packages = ["src/sim_plugin_matlab"]
 # live under the package dir, but be explicit to defend against future
 # regressions.
 include = ["src/sim_plugin_matlab/**"]
+[tool.pytest.ini_options]
+markers = [
+  "integration: tests that build wheels or touch external tooling",
+]

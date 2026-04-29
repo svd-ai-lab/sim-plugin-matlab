@@ -10,4 +10,13 @@ from .driver import MatlabDriver
 
 skills_dir = files(__name__) / "_skills"
 
-__all__ = ["MatlabDriver", "skills_dir"]
+
+plugin_info = {
+    "name": "matlab",
+    "summary": "Driver plugin for sim-cli.",
+    "homepage": "https://github.com/svd-ai-lab/sim-plugin-matlab",
+    "license_class": "commercial",
+    "solver_name": "matlab",
+}
+
+__all__ = ["MatlabDriver", "skills_dir", "plugin_info"]
