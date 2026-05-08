@@ -23,6 +23,19 @@ the optional `matlabengine` package that matches the installed MATLAB release;
 use `sim env install matlab` or install the matching pin from
 `compatibility.yaml`.
 
+Other optional MATLAB and Simulink agent toolkits may be available in the
+active agent environment. Combine them with this plugin when they fit the local
+setup and task. Examples include MathWorks' MATLAB Agentic Toolkit, Simulink
+Agentic Toolkit, and MATLAB MCP Core Server tools such as
+`evaluate_matlab_code`, `run_matlab_file`, `check_matlab_code`,
+`detect_matlab_toolboxes`, `model_overview`, `model_read`, `model_edit`,
+`model_query_params`, `model_resolve_params`, and `model_test`.
+
+Do not install, configure, vendor, or assume external agent toolkits from
+inside this plugin. If those tools are present, agents and users can combine
+them directly with `sim`; if they are absent, `sim run`, `sim exec`, and MATLAB
+`-batch` remain valid paths.
+
 ---
 
 ## MATLAB-specific layered content
