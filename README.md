@@ -4,6 +4,13 @@
 
 This plugin delegates to MathWorks' `matlabengine` package and the local MATLAB binary. It does **not** bundle MATLAB or any MathWorks SDK — see [LICENSE-NOTICE.md](LICENSE-NOTICE.md).
 
+Other optional agent toolkits can be combined with this plugin depending on
+your local environment and task. For example, if your agent environment already
+has MathWorks' [MATLAB Agentic Toolkit](https://github.com/matlab/matlab-agentic-toolkit),
+[Simulink Agentic Toolkit](https://github.com/matlab/simulink-agentic-toolkit),
+or [MATLAB MCP Core Server](https://github.com/matlab/matlab-mcp-core-server)
+available, those tools can be used alongside `sim-plugin-matlab`.
+
 ## Install
 
 ```bash
@@ -52,6 +59,10 @@ files, and `sim.plugins` exposes catalogue-style metadata for local discovery.
 Simulink models dispatch via `load_system → sim_shim.run → close_system`,
 where `+sim_shim/run.m` is the MATLAB-side helper bundled under
 `src/sim_plugin_matlab/matlab_pkg/`.
+
+Optional agent toolkits are complementary to this plugin rather than bundled by
+it. Agents and users can choose the available tool path that fits the task,
+while `sim-plugin-matlab` continues to provide the `sim` driver interface.
 
 ## Develop
 

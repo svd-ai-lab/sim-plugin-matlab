@@ -24,6 +24,18 @@ So `sim run my_model.slx --solver matlab` does **not** invoke
 `matlab -batch run('my_model.slx')`. It goes through the package
 helper `sim_shim.run` shipped alongside the driver.
 
+## Relationship to optional Simulink agent toolkits
+
+Optional Simulink agent toolkits may be available in the active agent
+environment and can be combined with this plugin according to the local setup
+and task. For example, MathWorks' Simulink Agentic Toolkit exposes model
+overview, read, edit, query, resolve, and test tools through the MATLAB MCP
+Core Server.
+
+This plugin does not vendor external toolkit `.p` files or generated MCP
+wrappers. Its bundled `sim_shim.run` remains the `.slx` batch artifact path for
+`sim run --solver matlab <model>.slx`.
+
 ## Package helper: `sim_shim.run`
 
 Shipped as a MATLAB package at
