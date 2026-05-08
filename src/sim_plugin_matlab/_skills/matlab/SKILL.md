@@ -18,7 +18,10 @@ sim check matlab
 
 For one-shot execution, use `sim run --solver matlab <script-or-model>`. For a
 local persistent MATLAB engine session, use `sim connect --solver matlab`, then
-bounded `sim exec` snippets, then `sim disconnect`.
+bounded `sim exec` snippets, then `sim disconnect`. Persistent sessions require
+the optional `matlabengine` package that matches the installed MATLAB release;
+use `sim env install matlab` or install the matching pin from
+`compatibility.yaml`.
 
 ---
 

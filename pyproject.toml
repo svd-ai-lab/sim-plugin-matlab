@@ -22,17 +22,19 @@ classifiers = [
     "Programming Language :: Python :: 3.12",
     "License :: OSI Approved :: Apache Software License",
 ]
-# matlabengine is rigidly coupled to the MATLAB binary version (24.1 only
-# talks to R2024a, etc.) and MathWorks does not provide a meta-package that
-# resolves the right pin automatically. Leave it unpinned here — the user
-# (or `sim env install matlab`) picks the SDK that matches the MATLAB
-# release they actually have. See compatibility.yaml for the mapping.
 dependencies = [
     "sim-cli-core>=0.3",
-    "matlabengine",
 ]
 
 [project.optional-dependencies]
+engine = [
+    # matlabengine is rigidly coupled to the MATLAB binary version (24.1 only
+    # talks to R2024a, etc.) and MathWorks does not provide a meta-package that
+    # resolves the right pin automatically. Leave it unpinned here; users or
+    # `sim env install matlab` choose the SDK that matches the MATLAB release
+    # they actually have. See compatibility.yaml for the mapping.
+    "matlabengine",
+]
 test = [
     "pytest>=7",
     "build>=1.0",

@@ -10,11 +10,17 @@ This plugin delegates to MathWorks' `matlabengine` package and the local MATLAB 
 pip install git+https://github.com/svd-ai-lab/sim-plugin-matlab@main
 ```
 
-The right `matlabengine` pin depends on the MATLAB release installed on
-your machine (24.1 ↔ R2024a, 24.2 ↔ R2024b, 25.1 ↔ R2025a, 25.2 ↔ R2025b).
-The plugin declares an unpinned `matlabengine` dependency; let pip pick the
-default and override with `pip install matlabengine==24.1` (or similar) if
-the auto-selected version mismatches your MATLAB.
+For local persistent sessions, install the MathWorks engine SDK that matches
+the MATLAB release installed on your machine (24.1 ↔ R2024a, 24.2 ↔ R2024b,
+25.1 ↔ R2025a, 25.2 ↔ R2025b):
+
+```bash
+pip install matlabengine==24.1
+```
+
+The plugin keeps `matlabengine` optional because the SDK build itself requires
+a matching local MATLAB installation. `sim env install matlab` can also choose
+the matching SDK pin from `compatibility.yaml`.
 
 After install, sim-cli auto-discovers the driver:
 
