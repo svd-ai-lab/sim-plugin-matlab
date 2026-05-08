@@ -1,6 +1,6 @@
 # sim-plugin-matlab
 
-[MATLAB](https://www.mathworks.com/products/matlab.html) driver for [sim-cli](https://github.com/svd-ai-lab/sim-cli), distributed as an out-of-tree plugin via Python `entry_points`.
+[MATLAB](https://www.mathworks.com/products/matlab.html) and Simulink driver for [sim-cli](https://github.com/svd-ai-lab/sim-cli), distributed as a plugin via Python `entry_points`.
 
 This plugin delegates to MathWorks' `matlabengine` package and the local MATLAB binary. It does **not** bundle MATLAB or any MathWorks SDK — see [LICENSE-NOTICE.md](LICENSE-NOTICE.md).
 
@@ -26,7 +26,7 @@ sim run --solver matlab path/to/model.slx
 
 ## How it works
 
-The plugin registers via two entry-point groups:
+The plugin registers via three entry-point groups:
 
 ```toml
 [project.entry-points."sim.drivers"]
@@ -34,10 +34,13 @@ matlab = "sim_plugin_matlab:MatlabDriver"
 
 [project.entry-points."sim.skills"]
 matlab = "sim_plugin_matlab:skills_dir"
+
+[project.entry-points."sim.plugins"]
+matlab = "sim_plugin_matlab:plugin_info"
 ```
 
-`sim.drivers` exposes the driver class; `sim.skills` exposes a directory
-of skill files bundled inside the wheel.
+`sim.drivers` exposes the driver class, `sim.skills` exposes the bundled skill
+files, and `sim.plugins` exposes catalogue-style metadata for local discovery.
 
 `.m` scripts dispatch via `matlab -batch "run('<path>')"`. `.slx`/`.mdl`
 Simulink models dispatch via `load_system → sim_shim.run → close_system`,
@@ -50,7 +53,8 @@ where `+sim_shim/run.m` is the MATLAB-side helper bundled under
 git clone https://github.com/svd-ai-lab/sim-plugin-matlab
 cd sim-plugin-matlab
 uv sync
-uv run pytest  # most tests need MATLAB + matlabengine; integration suite is skipped otherwise
+uv run pytest  # unit tests run without MATLAB
+SIM_MATLAB_RUN_INTEGRATION=1 uv run pytest tests/test_real_matlab_smoke.py -q
 ```
 
 ## License
