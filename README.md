@@ -20,7 +20,7 @@ environment:
 
 ```powershell
 uv init  # only if this is not already a uv project
-uv add sim-cli-core "git+https://github.com/svd-ai-lab/sim-plugin-matlab@main"
+uv add sim-cli-core sim-plugin-matlab
 uv run sim plugin sync-skills --target .agents/skills --copy
 uv run sim check matlab
 uv run sim plugin doctor matlab --deep
@@ -45,7 +45,7 @@ uv run sim plugin sync-skills --target .claude/skills --copy
 
 `uv run sim ...` runs sim from this project environment, so it sees this
 project's plugins. Without uv, create and activate a venv, then install
-`sim-cli-core` plus this plugin with `python -m pip`.
+`sim-cli-core` plus this plugin from PyPI with `python -m pip`.
 
 ## How it works
 
