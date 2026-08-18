@@ -55,6 +55,25 @@ checkpoint contains state that can actually continue the calculation. Without
 a usable checkpoint, describe the action as a restart rather than promising
 generic resume behavior.
 
+## Parallel pool capacity
+
+Before changing or launching a requested worker count, inspect the selected
+cluster profile's `NumWorkers`, any pool returned by `gcp('nocreate')`, Parallel
+Computing Toolbox/license availability, scheduler capacity, CPU topology, and
+memory. A logical-processor count does not prove that the same number of MATLAB
+workers is supported or efficient. If the request exceeds the selected
+profile's capacity, do not silently raise the limit or promise the pool will
+start; use a separately validated profile or scheduler, offer bounded
+batching/queuing, or report the capacity blocker.
+
+Do not equate one process worker with one dedicated physical core. A worker can
+still invoke multithreaded BLAS, OpenMP, MEX, or external-solver code. Control
+inner threading in the component that owns it, then benchmark a representative
+subset before a long sweep. Record the cluster/profile, actual pool size,
+thread controls, and observed resource use. Claim physical-core affinity or
+exclusivity only when the operating system or scheduler enforced it and the run
+evidence verifies it.
+
 Other optional MATLAB and Simulink agent toolkits may be available in the
 active agent environment. Combine them with this plugin when they fit the local
 setup and task. Examples include MathWorks' MATLAB Agentic Toolkit, Simulink
